@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Paper Game</h1>
+        
+        <!-- Word Submission Section -->
+        <div id="submission-section" class="section">
+            <h2>Submit Your Word</h2>
+            <p class="instructions">Each player enters their name and secret word.</p>
+            <form id="word-form">
+                <div class="form-group">
+                    <label for="player-name">Player Name:</label>
+                    <input type="text" id="player-name" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="player-word">Your Word:</label>
+                    <input type="text" id="player-word" required placeholder="Enter your word">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Word</button>
+            </form>
+            <div id="player-list">
+                <h3>Players Submitted: <span id="player-count">0</span></h3>
+                <ul id="players"></ul>
+            </div>
+            <button id="start-game-btn" class="btn btn-success" disabled>Start Game</button>
+        </div>
+
+        <!-- Game Section -->
+        <div id="game-section" class="section hidden">
+            <h2>🎲 Let's Play!</h2>
+            <p class="instructions">Listen to the words and guess who submitted each one!</p>
+            <div class="controls">
+                <button id="read-words-btn" class="btn btn-primary">Read All Words</button>
+                <button id="repeat-words-btn" class="btn btn-secondary">Repeat Words</button>
+            </div>
+            <div id="word-display">
+                <p id="current-word"></p>
+            </div>
+            <button id="reveal-btn" class="btn btn-warning">Reveal Answers</button>
+        </div>
+
+        <!-- Reveal Section -->
+        <div id="reveal-section" class="section hidden">
+            <h2>🎉 Word Reveal</h2>
+            <div id="reveal-list"></div>
+            <button id="new-game-btn" class="btn btn-primary">New Game</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
