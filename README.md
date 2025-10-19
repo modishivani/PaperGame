@@ -1,6 +1,6 @@
-# 🎮 Word Guessing Game - Multiplayer Edition
+# 📝 Paper Game - Multiplayer Edition
 
-A real-time multiplayer word guessing game where everyone submits words from their phones and the host reads them aloud!
+A real-time multiplayer word guessing game with a sketchy, hand-drawn aesthetic. Players submit words from their phones, and the host reads them aloud!
 
 ## 🚀 Setup Instructions
 
@@ -8,102 +8,134 @@ A real-time multiplayer word guessing game where everyone submits words from the
 If you don't have Node.js installed, download it from [nodejs.org](https://nodejs.org/)
 
 ### 2. Install Dependencies
-Open PowerShell in the PaperGame folder and run:
-```powershell
+Open terminal/command prompt in the project folder and run:
+```bash
 npm install
 ```
 
 ### 3. Start the Server
-```powershell
+```bash
 npm start
 ```
 
-The server will start on port 3000.
-
-### 4. Find Your IP Address
-To let others connect from their phones, you need your computer's IP address:
-```powershell
-ipconfig
-```
-Look for "IPv4 Address" (usually starts with 192.168.x.x)
+The server will automatically detect your local IP and start on port 3000.
 
 ## 📱 How to Play
 
 ### For the Host (Game Master):
-1. Open a browser and go to: `http://localhost:3000`
-2. Click **"Host a Game"**
-3. Click **"Create New Game"**
-4. Share the **room code** with your friends
-5. Wait for everyone to join and submit their words
-6. Click **"Start Game"** when ready
-7. Click **"Read All Words"** to hear all words spoken aloud
-8. Use **"Repeat"** to hear them again
-9. Play the guessing game with your friends!
-10. Click **"Reveal Answers"** to show who wrote what
+1. Go to the game url.
+2. Click **"🖥️ Host a Game"**
+3. Enter **WiFi network name** and **password** for your players
+4. Click **"Create Game"** - you'll get a room code instantly
+5. Share the room code or QR code with your friends
+6. Wait for everyone to join and submit their **English words only**
+7. Click **"Start Game"** when at least 2 players have submitted words
+8. Click **"Read All Words"** to hear all words with different AI voices
+9. Use **"Repeat"** to hear them again
+10. Play the guessing game with your friends!
+11. Click **"Reveal Answers"** to show who wrote what
 
 ### For Players (On Phones):
-1. Connect to the same WiFi as the host
-2. Open a browser on your phone
-3. Go to: `http://[HOST_IP]:3000` (replace [HOST_IP] with the host's IP address)
-   - Example: `http://192.168.1.100:3000`
-4. Click **"Join a Game"**
+1. Connect to the WiFi network shown by the host
+2. **Scan the QR code** with your phone camera, or
+3. Open a browser and go to the **join URL** displayed by the host
+4. Click **"📱 Join a Game"**
 5. Enter the **room code** and your **name**
-6. Submit your **secret word**
+6. Submit your **secret English word**
 7. Wait for the game to start
-8. Listen to the words and guess!
-9. See the reveal at the end
+8. Listen to the words (each spoken by a different voice!)
+9. Guess who wrote what with your group
+10. See the reveal at the end
 
 ## ✨ Features
 
-- ✅ Real-time multiplayer using Socket.IO
-- ✅ Text-to-speech reads words aloud automatically
-- ✅ Room codes for easy joining
-- ✅ Mobile-friendly interface
-- ✅ Multiple games can run simultaneously
-- ✅ Live player status updates
-- ✅ Automatic word shuffling
-- ✅ Beautiful, modern UI
+- ✅ **Sketchy Paper Theme**: Hand-drawn aesthetic with dashed borders and pastel colors
+- ✅ **Multiple AI Voices**: Each word is read by a different voice for variety
+- ✅ **QR Code Support**: Easy mobile joining via QR code scanning
+- ✅ **Custom WiFi Setup**: Host configures network details for each game
+- ✅ **Auto IP Detection**: Server automatically detects and uses your LAN IP
+- ✅ **Real-time Multiplayer**: Live updates using Socket.IO
+- ✅ **Mobile-Optimized**: Responsive design for phones and tablets
+- ✅ **Room Code System**: Simple 6-letter codes for easy joining
+- ✅ **Live Player Status**: See who's joined and submitted words
+- ✅ **English-Only Prompts**: Clear instructions for better speech synthesis
+- ✅ **No Popups**: Clean, uninterrupted gameplay experience
+- ✅ **Paper-Themed Emojis**: Consistent iconography (📝, 📄, ✏️, 🗒️, 📑)
 
 ## 🎯 Game Rules
 
-1. Each player submits a secret word
-2. The host reads all words aloud (in random order)
-3. Players try to guess who submitted each word
-4. At the end, reveal shows everyone's words
+1. **English words only** - for best speech synthesis results
+2. Each player submits one secret word
+3. Host reads all words aloud using a voice
+4. Players discuss and guess who submitted each word
+5. Host reveals the answers showing player names and their words
+6. Minimum 2 players required to start
 
 ## 🛠️ Troubleshooting
 
-### Players can't connect:
-- Make sure everyone is on the same WiFi network
-- Check your firewall isn't blocking port 3000
-- Verify you're using the correct IP address
+### Players can't join via QR code:
+- Make sure everyone is connected to the WiFi network specified by the host
+- Try typing the join URL manually instead of scanning
+- Ensure the host's computer and player phones are on the same network
 
 ### No sound when reading words:
-- Make sure your browser supports Web Speech API (Chrome, Edge work best)
-- Check your computer's volume settings
-- Try refreshing the page
+- Use Chrome, Edge, or Safari for best Web Speech API support
+- Check your computer's volume and browser sound settings
+- Make sure the host's device has speakers/headphones connected
+- Try refreshing the host page if voices don't load
 
-### Server won't start:
-- Make sure port 3000 isn't already in use
-- Try running: `npm install` again
+### Connection issues:
+- Check that port 3000 isn't blocked by firewall
+- Verify all devices are on the same WiFi network
+- Try restarting the server with `npm start`
+
+### Game doesn't start:
+- Ensure at least 2 players have submitted words
+- Check that players entered English words only
+- Refresh the host page if the start button stays disabled
+
+## 🎨 Design Theme
+
+The game features a **sketchy paper aesthetic** with:
+- Hand-drawn fonts (Patrick Hand, Gloria Hallelujah, Caveat)
+- Dashed borders and offset shadows
+- Pastel color palette with paper-like textures
+- Slight rotations for organic feel
+- Paper-themed emojis throughout
 
 ## 📝 Development Mode
 
 For development with auto-restart:
-```powershell
+```bash
 npm run dev
 ```
 
-## 🔧 Changing the Port
+## 🔧 Customization
 
-Edit `server.js` and change:
+### Changing the Port
+Edit `server.js` and modify:
 ```javascript
 const PORT = process.env.PORT || 3000;
 ```
 
-Then connect using the new port number.
+### Voice Settings
+Speech synthesis options can be adjusted in `host.js`:
+- Voice cycling through available system voices
+- Speech rate, pitch, and volume controls
+- Timeout between words (currently 1.5 seconds)
 
-## 🎉 Have Fun!
+### Styling
+The sketchy theme can be customized in `public/style.css`:
+- Color palette in `:root` CSS variables
+- Border styles and rotations
+- Font selections and sizes
 
-Enjoy playing with your friends!
-"# PaperGameHelper" 
+## 🎉 Perfect For
+
+- **Party games** with friends and family
+- **Ice breakers** at events and gatherings  
+- **Creative writing** exercises and prompts
+- **Team building** activities
+- **Language learning** practice (English focus)
+
+Enjoy your paper game sessions! 📝✨ 
