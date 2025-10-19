@@ -15,24 +15,23 @@
         .btn-large { width: 100%; font-size: 1.2em; padding: 14px 0; }
         .section { margin-bottom: 1.5em; }
         @media (max-width: 600px) {
-            .container.mobile-container { padding: 0 2vw; }
             h1, h2, h3 { font-size: 1.2em; }
         }
     </style>
 </head>
 <body>
     <div class="container mobile-container">
-        <h1>📱 Join Paper Game</h1>
+        <h1>🗞️ Join Paper Game</h1>
         
         <!-- Join Room -->
         <div id="join-section" class="section">
             <form id="join-form">
                 <div class="form-group">
-                    <label for="room-code-input">Room Code</label>
+                    <label for="room-code-input">📄 Room Code</label>
                     <input type="text" id="room-code-input" required placeholder="Enter room code" maxlength="6" style="text-transform: uppercase;">
                 </div>
                 <div class="form-group">
-                    <label for="player-name-input">Your Name</label>
+                    <label for="player-name-input">✏️ Your Name</label>
                     <input type="text" id="player-name-input" required placeholder="Enter your name">
                 </div>
                 <button type="submit" class="btn btn-primary btn-large">Join Game</button>
@@ -43,14 +42,14 @@
         <!-- Submit Word -->
         <div id="submit-section" class="section hidden">
             <div class="status-card success">
-                <h2>✅ Joined!</h2>
+                <h2>📝 Joined!</h2>
                 <p>Room: <strong id="joined-room-code"></strong></p>
                 <p>Player: <strong id="joined-player-name"></strong></p>
             </div>
             
             <form id="word-form">
                 <div class="form-group">
-                    <label for="word-input">Your Secret Word</label>
+                    <label for="word-input">🗒️ Your Secret Word</label>
                     <input type="text" id="word-input" required placeholder="Enter your word">
                 </div>
                 <button type="submit" class="btn btn-success btn-large">Submit Word</button>
@@ -60,7 +59,7 @@
         <!-- Waiting for Game -->
         <div id="waiting-section" class="section hidden">
             <div class="status-card success">
-                <h2>✅ Word Submitted!</h2>
+                <h2>📄 Word Submitted!</h2>
                 <p>Your word: <strong id="submitted-word"></strong></p>
             </div>
             
@@ -73,7 +72,7 @@
         <!-- Game Playing -->
         <div id="playing-section" class="section hidden">
             <div class="status-card info">
-                <h2>🎮 Game Started!</h2>
+                <h2>🗒️ Game Started!</h2>
                 <p>Listen to the words and guess who wrote what!</p>
             </div>
             
@@ -89,7 +88,7 @@
 
         <!-- Reveal Section -->
         <div id="reveal-section" class="section hidden">
-            <h2>🎉 Results!</h2>
+            <h2>📑 Results!</h2>
             <div id="player-reveal-list"></div>
         </div>
     </div>

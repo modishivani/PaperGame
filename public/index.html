@@ -4,145 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paper Game</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        h1 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
-
-        .subtitle {
-            color: #666;
-            margin-bottom: 40px;
-            font-size: 1.2em;
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .btn {
-            padding: 20px 40px;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-host {
-            background: #667eea;
-            color: white;
-        }
-
-        .btn-host:hover {
-            background: #5568d3;
-        }
-
-        .btn-join {
-            background: #28a745;
-            color: white;
-        }
-
-        .btn-join:hover {
-            background: #218838;
-        }
-
-        .info {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            color: #666;
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-
-        .emoji {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="emoji">🎮</div>
-        <h1>Paper Game</h1>
-        <p class="subtitle">Multiplayer Edition</p>
-        
-        <div class="button-group">
-            <a href="/host" class="btn btn-host">
-                🖥️ Host a Game
-            </a>
-            <a href="/join" class="btn btn-join">
-                📱 Join a Game
-            </a>
-            <div id="qr-section" style="margin-top:10px;">
-                <div id="qrcode"></div>
-                <p id="qr-link" style="font-size:0.9em;color:#666;word-break:break-all;"></p>
-                <p style="font-size:0.9em;color:#666;">Scan to join on your phone!</p>
+        <div class="container" style="text-align:center; max-width: 560px;">
+            <div class="emoji">📜</div>
+            <h1>Paper Game</h1>
+            <p class="subtitle">Multiplayer Edition</p>
+
+            <div class="button-group">
+                <a href="/host" class="btn btn-host">🖥️ Host a Game</a>
+                <a href="/join" class="btn btn-join">📱 Join a Game</a>
+                <div id="qr-section" style="margin-top:10px;">
+                    <div id="qrcode"></div>
+                    <p id="qr-link" class="instructions" style="word-break: break-all;"></p>
+                    <p class="instructions">Scan to join on your phone!</p>
+                </div>
+            </div>
+
+            <div class="info">
+                <strong>How to Play:</strong><br>
+                One person hosts the game and shares the room code.<br>
+                Everyone else joins on their phones and submits a word.<br>
+                The host reads the words aloud and you guess who wrote what!
             </div>
         </div>
-
-        <div class="info">
-            <strong>How to Play:</strong><br>
-            One person hosts the game and shares the room code.<br>
-            Everyone else joins on their phones and submits a word.<br>
-            The host reads the words aloud and you guess who wrote what!
-        </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
     <script>
         // Generate QR code for join page
         (function() {
-            // Hardcode your LAN IP for the QR code and link
-            var ip = '192.168.87.49'; // <-- Set your LAN IP here
-            var loc = window.location;
-            var joinUrl = loc.protocol + '//' + ip + (loc.port ? ':' + loc.port : '') + '/join';
+            // Use current location and add /join to the end
+            var joinUrl = window.location.href.replace(/\/$/, '') + '/join';
             var qr = new QRious({
                 value: joinUrl,
                 size: 140
             });
             document.getElementById('qrcode').appendChild(qr.canvas);
             document.getElementById('qr-link').textContent = joinUrl;
+            document.getElementById('debug-info').textContent = 'Join URL: ' + joinUrl;
         })();
     </script>
 </body>

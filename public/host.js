@@ -1,12 +1,16 @@
 const socket = io();
 
 // DOM Elements
-const createSection = document.getElementById('create-section');
+const wifiSettingsSection = document.getElementById('wifi-settings-section');
 const waitingSection = document.getElementById('waiting-section');
 const gameSection = document.getElementById('game-section');
 const revealSection = document.getElementById('reveal-section');
 
-const createGameBtn = document.getElementById('create-game-btn');
+const wifiForm = document.getElementById('wifi-form');
+const wifiNetworkInput = document.getElementById('wifi-network');
+const wifiPasswordInput = document.getElementById('wifi-password');
+const displayWifiNetwork = document.getElementById('display-wifi-network');
+const displayWifiPassword = document.getElementById('display-wifi-password');
 const roomCodeDisplay = document.getElementById('room-code');
 const playersGrid = document.getElementById('players-grid');
 const playerCount = document.getElementById('player-count');
@@ -24,16 +28,29 @@ let gameWords = [];
 // Speech synthesis
 const synth = window.speechSynthesis;
 
-// Create Game
-createGameBtn.addEventListener('click', () => {
-    socket.emit('create-game');
+// WiFi Form Submission
+wifiForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const wifiNetwork = wifiNetworkInput.value.trim();
+    const wifiPassword = wifiPasswordInput.value.trim();
+    
+    if (wifiNetwork && wifiPassword) {
+        // Update display elements
+        displayWifiNetwork.textContent = wifiNetwork;
+        displayWifiPassword.textContent = wifiPassword;
+        
+        // Create the game
+        socket.emit('create-game');
+    }
 });
 
 // Socket Events
 socket.on('game-created', ({ roomCode }) => {
     currentRoomCode = roomCode;
     roomCodeDisplay.textContent = roomCode;
-    createSection.classList.add('hidden');
+    
+    // Hide WiFi settings and show waiting section
+    wifiSettingsSection.classList.add('hidden');
     waitingSection.classList.remove('hidden');
 });
 
@@ -47,7 +64,7 @@ socket.on('player-submitted', ({ players }) => {
 
 socket.on('player-left', ({ playerName, players }) => {
     updatePlayerList(players);
-    alert(`${playerName} left the game`);
+    // Removed popup alert notification
 });
 
 function updatePlayerList(players) {
@@ -100,21 +117,27 @@ function readAllWords() {
     currentWordDisplay.textContent = 'Reading words...';
     
     let index = 0;
-    
+
     function speakNext() {
         if (index < gameWords.length) {
+            // Get available voices before speaking each word
+            const voices = synth.getVoices();
+            
             currentWordDisplay.textContent = `Word ${index + 1} of ${gameWords.length}`;
             
             const utterance = new SpeechSynthesisUtterance(gameWords[index]);
-            utterance.rate = 0.9;
+            
+            utterance.voice = voices[1]; // 23 is other good option, 108 for en-in
+            utterance.rate = 0.8;
             utterance.pitch = 1;
             utterance.volume = 1;
             
             utterance.onend = () => {
                 index++;
-                setTimeout(speakNext, 800);
+                // Increased timeout between words (1.5 seconds)
+                setTimeout(speakNext, 1500);
             };
-            
+  
             utterance.onerror = (error) => {
                 console.error('Speech error:', error);
                 currentWordDisplay.textContent = 'Error reading words. Please try again.';
@@ -171,7 +194,7 @@ socket.on('game-reset', () => {
 
 // Disconnect handling
 socket.on('disconnect', () => {
-    alert('Disconnected from server');
+    // Removed popup alert notification
 });
 
 // Cleanup
